@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 // ─── Tiny helpers ─────────────────────────────────────────────────────────────
 
@@ -25,6 +25,13 @@ function Toggle({ value, onChange, labelOff, labelOn }) {
 function RoutineEditor({ station, routine, onUpdateRoutine }) {
   const [open, setOpen] = useState(false)
   const [newTask, setNewTask] = useState('')
+  const bodyRef = useRef(null)
+
+  useEffect(() => {
+    if (open && bodyRef.current) {
+      bodyRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [open])
 
   const handleTaskBlur = (taskId, value) => {
     const trimmed = value.trim()
@@ -74,7 +81,7 @@ function RoutineEditor({ station, routine, onUpdateRoutine }) {
       </button>
 
       {open && (
-        <div className="routine-editor__body">
+        <div className="routine-editor__body" ref={bodyRef}>
           {/* Playlist */}
           <label className="settings-label">
             Spotify Playlist
@@ -139,13 +146,21 @@ function RoutineEditor({ station, routine, onUpdateRoutine }) {
 
 function StationEditor({ station, onUpdateRoutine }) {
   const [open, setOpen] = useState(false)
+  const bodyRef = useRef(null)
+
+  useEffect(() => {
+    if (open && bodyRef.current) {
+      bodyRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [open])
 
   return (
-    <div className="station-editor">
+    <div className={`station-editor${open ? ' station-editor--open' : ''}`}>
       <button
         className="station-editor__toggle"
         style={{ '--accent': station.color }}
         onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
       >
         <span className="station-editor__icon">{station.icon}</span>
         <span className="station-editor__name">{station.name}</span>
@@ -158,7 +173,7 @@ function StationEditor({ station, onUpdateRoutine }) {
       </button>
 
       {open && (
-        <div className="station-editor__body">
+        <div className="station-editor__body" ref={bodyRef}>
           {station.routines.map((routine) => (
             <RoutineEditor
               key={routine.id}

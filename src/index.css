@@ -911,6 +911,7 @@ ul { list-style: none; }
   background: transparent;
   border: none;
   border-radius: 0;
+  overflow: visible;
   gap: 8px;
   display: flex;
   flex-direction: column;
@@ -1219,12 +1220,17 @@ ul { list-style: none; }
   transform: rotate(180deg);
 }
 
+.station-editor--open .station-editor__toggle {
+  background: rgba(var(--fg-rgb), 0.05);
+}
+
 .station-editor__body {
   border-top: 1px solid rgba(var(--fg-rgb), 0.06);
   padding: 8px 12px 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  animation: slideDown 0.18s ease;
 }
 
 .routine-editor {
@@ -1276,6 +1282,12 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: 12px;
+  animation: slideDown 0.18s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .task-edit-list {
