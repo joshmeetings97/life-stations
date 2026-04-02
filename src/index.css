@@ -898,6 +898,7 @@ ul { list-style: none; }
   letter-spacing: 0.12em;
   color: var(--text-3);
   padding: 16px 4px 6px;
+  flex-shrink: 0;
 }
 
 .settings-card {
@@ -905,6 +906,7 @@ ul { list-style: none; }
   border: 1px solid rgba(var(--fg-rgb), 0.08);
   border-radius: 20px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .settings-card--plain {

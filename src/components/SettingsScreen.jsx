@@ -328,27 +328,6 @@ export default function SettingsScreen({
           </div>
         </div>
 
-        {/* Theme */}
-        <SectionHeader>Theme</SectionHeader>
-        <div className="settings-card">
-          <div className="settings-row settings-row--col">
-            <div className="theme-picker">
-              {THEMES.map((t) => (
-                <button
-                  key={t.id}
-                  className={`theme-pick-btn${currentTheme === t.id ? ' active' : ''}`}
-                  style={{ '--swatch-bg': t.bg, '--swatch-dot': t.dot }}
-                  onClick={() => updateSettings({ theme: t.id })}
-                  aria-label={t.name}
-                >
-                  <span className="theme-pick-swatch" />
-                  <span className="theme-pick-label">{t.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* Display */}
         <SectionHeader>Display Mode</SectionHeader>
         <div className="settings-card">
@@ -395,6 +374,27 @@ export default function SettingsScreen({
               onUpdateRoutine={updateRoutine}
             />
           ))}
+        </div>
+
+        {/* Theme */}
+        <SectionHeader>Theme</SectionHeader>
+        <div className="settings-card">
+          <div className="settings-row settings-row--col">
+            <div className="theme-picker">
+              {THEMES.map((t) => (
+                <button
+                  key={t.id}
+                  className={`theme-pick-btn${currentTheme === t.id ? ' active' : ''}`}
+                  style={{ '--swatch-bg': t.bg, '--swatch-dot': t.dot }}
+                  onClick={() => updateSettings({ theme: t.id })}
+                  aria-label={t.name}
+                >
+                  <span className="theme-pick-swatch" />
+                  <span className="theme-pick-label">{t.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
       </div>
