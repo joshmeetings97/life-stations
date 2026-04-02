@@ -3,6 +3,7 @@ import HomeScreen from './components/HomeScreen'
 import StationScreen from './components/StationScreen'
 import RoutineScreen from './components/RoutineScreen'
 import SettingsScreen from './components/SettingsScreen'
+import SpotifyBar from './components/SpotifyBar'
 import { useAppState } from './hooks/useAppState'
 import { useSpotify } from './hooks/useSpotify'
 
@@ -109,7 +110,6 @@ export default function App() {
           station={currentStation}
           routine={currentRoutine}
           viewMode={state.settings.viewMode}
-          spotify={spotify}
           onBack={handleBackFromRoutine}
           onHome={handleHome}
         />
@@ -126,6 +126,8 @@ export default function App() {
           onBack={handleHome}
         />
       )}
+
+      <SpotifyBar spotify={spotify} />
     </div>
   )
 }
