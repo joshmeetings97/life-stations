@@ -3,7 +3,7 @@
 const PL = {
   MORNING_MOTIVATION:  'spotify:playlist:37i9dQZF1DX3rxVfibe1L0', // Morning Motivation
   GOOD_MORNING:        'spotify:playlist:37i9dQZF1DXdPec7aLTmlC', // Good Morning
-  WAKE_UP_HAPPY:       'spotify:playlist:37i9dQZF1DX0UrRvztWcTL', // Wake Up Happy
+  WAKE_UP_HAPPY:       'spotify:playlist:37i9dQZF1DX3rxVfibe1L0', // Morning Motivation (reliable fallback)
   DEEP_FOCUS:          'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', // Deep Focus
   FOCUS_FLOW:          'spotify:playlist:37i9dQZF1DWZZbwlv3Vmtr', // Focus Flow
   CHILL_HITS:          'spotify:playlist:37i9dQZF1DX4WYpdgoIcn6', // Chill Hits
@@ -191,6 +191,7 @@ export const DEFAULT_STATIONS = [
 export const DEFAULT_SETTINGS = {
   viewMode: 'checklist', // 'checklist' | 'single'
   defaultStationId: null, // null = show Home screen; station id = open that station on load
+  playlistVersion: 2, // bump this to force-overwrite playlist URIs on next load
   spotify: {
     clientId: '',
     accessToken: '',

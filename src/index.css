@@ -47,6 +47,7 @@ ul { list-style: none; }
   flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden; /* required so flex children with min-height:0 can scroll */
   background: #0d0c14;
   animation: fadeIn 0.2s ease;
 }
@@ -264,6 +265,7 @@ ul { list-style: none; }
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 20px 20px;
   display: flex;
   flex-direction: column;
@@ -352,6 +354,7 @@ ul { list-style: none; }
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 16px 20px;
   display: flex;
   flex-direction: column;
@@ -766,6 +769,7 @@ ul { list-style: none; }
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 12px 18px 40px;
   display: flex;
   flex-direction: column;
@@ -1166,61 +1170,106 @@ ul { list-style: none; }
 
 /* ─── Phone responsive ─────────────────────────────────────────────────────── */
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+  /* Base font scale down slightly */
+  body { font-size: 16px; }
+
+  /* Headers */
   .screen-header {
-    padding: 14px 14px 12px;
+    padding: 12px 14px 10px;
+  }
+  .screen-header__title {
+    font-size: 1.05rem;
   }
 
+  /* Home screen */
+  .home-header {
+    padding: 18px 16px 12px;
+  }
+  .clock-greeting { font-size: 0.82rem; }
+  .clock-time { font-size: 2rem; }
+  .clock-date { font-size: 0.82rem; }
+  .stations-grid {
+    padding: 4px 12px 14px;
+    gap: 10px;
+  }
+  .station-card {
+    min-height: 115px;
+    padding: 14px 14px;
+    border-radius: 18px;
+  }
+  .station-card__icon { font-size: 1.9rem; margin-bottom: 8px; }
+  .station-card__name { font-size: 1rem; }
+
+  /* Station screen */
+  .routines-list { padding: 14px 14px; }
+  .routine-btn { padding: 16px 16px; min-height: 66px; }
+  .routine-btn__name { font-size: 1.05rem; }
+
+  /* Routine screen */
+  .task-item { padding: 14px 14px; min-height: 58px; }
+  .task-item__text { font-size: 1rem; }
+  .single-task-text { font-size: 1.4rem; }
+  .complete-btn, .single-done-btn { min-height: 58px; font-size: 1rem; }
+
+  /* Settings scroll */
   .settings-scroll {
-    padding: 10px 14px 40px;
+    padding: 8px 12px 36px;
+  }
+  .settings-section-header {
+    padding: 12px 4px 4px;
   }
 
+  /* Settings rows always stack on phone */
   .settings-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    padding: 16px 16px;
-  }
-
-  .mode-toggle-group {
-    width: 100%;
-  }
-
-  .mode-toggle-btn {
-    flex: 1;
-    text-align: center;
-  }
-
-  .station-pick-btn {
-    flex: 1 1 calc(50% - 4px);
-    text-align: center;
-  }
-
-  .station-editor__toggle,
-  .routine-editor__toggle {
+    gap: 10px;
     padding: 14px 14px;
   }
+  .settings-row__title { font-size: 0.95rem; }
+  .settings-row__sub { font-size: 0.8rem; }
 
-  .routine-editor__body,
-  .station-editor__body {
-    padding: 10px 10px;
+  /* Mode toggle full width */
+  .mode-toggle-group { width: 100%; }
+  .mode-toggle-btn { flex: 1; text-align: center; font-size: 0.82rem; padding: 9px 10px; }
+
+  /* Station picker */
+  .station-picker { gap: 6px; }
+  .station-pick-btn {
+    flex: 1 1 calc(50% - 3px);
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 0.82rem;
   }
 
-  .clock-time {
-    font-size: 2.2rem;
-  }
+  /* Spotify section */
+  .spotify-section { padding: 14px 14px; gap: 10px; }
+  .spotify-connect-btn { min-height: 48px; font-size: 0.95rem; }
+  .settings-input { padding: 11px 12px; font-size: 0.95rem; }
 
-  .home-header {
-    padding: 20px 16px 14px;
-  }
+  /* Station / routine editors */
+  .settings-card { border-radius: 16px; }
+  .station-editor { border-radius: 16px; }
+  .station-editor__toggle { padding: 13px 14px; }
+  .station-editor__name { font-size: 0.95rem; }
+  .station-editor__body { padding: 6px 8px 10px; gap: 4px; }
 
-  .stations-grid {
-    padding: 6px 14px 16px;
-    gap: 10px;
-  }
+  .routine-editor { border-radius: 12px; }
+  .routine-editor__toggle { padding: 11px 12px; gap: 8px; }
+  .routine-editor__body { padding: 10px 10px; gap: 10px; }
 
-  .station-card {
-    min-height: 120px;
-    padding: 16px 16px;
-  }
+  /* Task edit rows */
+  .task-edit-list { gap: 6px; }
+  .task-edit-item { gap: 6px; }
+  .task-delete-btn { width: 36px; height: 36px; }
+  .task-add-row { flex-direction: column; gap: 8px; }
+  .task-add-btn { min-height: 44px; width: 100%; }
+
+  /* Spotify bar */
+  .spotify-bar { padding: 8px 12px; min-height: 62px; }
+  .spotify-bar__art { width: 38px; height: 38px; }
+  .spotify-bar__name { font-size: 0.82rem; }
+  .spotify-ctrl { width: 36px; height: 36px; }
+  .spotify-ctrl--play { width: 44px; height: 44px; }
 }

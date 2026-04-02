@@ -16,7 +16,10 @@ function buildInitialState(saved) {
     return { stations: DEFAULT_STATIONS, settings: DEFAULT_SETTINGS }
   }
 
-  // Migrate: fill in empty playlistUri fields from defaults without wiping user edits
+  // Migrate playlists: if saved version is behind current, force-overwrite all playlist URIs
+  const savedPlaylistVersion = saved.settings?.playlistVersion ?? 0
+  const forcePlaylistUpdate = savedPlaylistVersion < DEFAULT_SETTINGS.playlistVersion
+
   const savedStations = saved.stations ?? DEFAULT_STATIONS
   const stations = savedStations.map((savedStation) => {
     const defaultStation = DEFAULT_STATIONS.find((s) => s.id === savedStation.id)
@@ -28,7 +31,10 @@ function buildInitialState(saved) {
         if (!defaultRoutine) return savedRoutine
         return {
           ...savedRoutine,
-          playlistUri: savedRoutine.playlistUri || defaultRoutine.playlistUri,
+          // Force update when version is bumped; otherwise only fill blanks
+          playlistUri: forcePlaylistUpdate
+            ? defaultRoutine.playlistUri
+            : (savedRoutine.playlistUri || defaultRoutine.playlistUri),
         }
       }),
     }
