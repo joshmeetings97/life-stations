@@ -191,6 +191,7 @@ export const DEFAULT_STATIONS = [
 export const DEFAULT_SETTINGS = {
   viewMode: 'checklist', // 'checklist' | 'single'
   defaultStationId: null, // null = show Home screen; station id = open that station on load
+  theme: 'midnight', // one of the 10 theme ids
   playlistVersion: 2, // bump this to force-overwrite playlist URIs on next load
   spotify: {
     clientId: '',

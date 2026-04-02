@@ -240,6 +240,21 @@ function SpotifySection({ spotifyState, spotify }) {
   )
 }
 
+// ─── Theme picker ─────────────────────────────────────────────────────────────
+
+const THEMES = [
+  { id: 'midnight', name: 'Midnight', bg: '#0d0c14', dot: '#5c5870' },
+  { id: 'slate',    name: 'Slate',    bg: '#0c1018', dot: '#4a5b78' },
+  { id: 'forest',   name: 'Forest',   bg: '#0b1209', dot: '#4a6c48' },
+  { id: 'ember',    name: 'Ember',    bg: '#12100a', dot: '#7a5a30' },
+  { id: 'rose',     name: 'Rose',     bg: '#110c0e', dot: '#7a4a5a' },
+  { id: 'ocean',    name: 'Ocean',    bg: '#08110e', dot: '#3a6a5a' },
+  { id: 'dusk',     name: 'Dusk',     bg: '#0f0a1a', dot: '#6a4a8a' },
+  { id: 'carbon',   name: 'Carbon',   bg: '#080808', dot: '#555555' },
+  { id: 'arctic',   name: 'Arctic',   bg: '#eef2f7', dot: '#5a6a80' },
+  { id: 'warm',     name: 'Warm',     bg: '#f5f0e8', dot: '#7a6a58' },
+]
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 export default function SettingsScreen({
@@ -250,6 +265,7 @@ export default function SettingsScreen({
   onBack,
 }) {
   const isChecklist = state.settings.viewMode === 'checklist'
+  const currentTheme = state.settings.theme ?? 'midnight'
 
   return (
     <div className="screen settings-screen">
@@ -291,6 +307,27 @@ export default function SettingsScreen({
                   onClick={() => updateSettings({ defaultStationId: s.id })}
                 >
                   {s.icon} {s.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Theme */}
+        <SectionHeader>Theme</SectionHeader>
+        <div className="settings-card">
+          <div className="settings-row settings-row--col">
+            <div className="theme-picker">
+              {THEMES.map((t) => (
+                <button
+                  key={t.id}
+                  className={`theme-pick-btn${currentTheme === t.id ? ' active' : ''}`}
+                  style={{ '--swatch-bg': t.bg, '--swatch-dot': t.dot }}
+                  onClick={() => updateSettings({ theme: t.id })}
+                  aria-label={t.name}
+                >
+                  <span className="theme-pick-swatch" />
+                  <span className="theme-pick-label">{t.name}</span>
                 </button>
               ))}
             </div>

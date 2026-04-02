@@ -88,7 +88,7 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app" data-theme={state.settings.theme ?? 'midnight'}>
       {view === 'home' && (
         <HomeScreen
           stations={state.stations}

@@ -44,6 +44,7 @@ Full-screen tablet web app for wall-mounted daily routine stations. React + Vite
 - **12 routines** with all tasks pre-loaded
 - **Default station per tablet**: Settings → This Tablet → pick a station; app opens directly to it on load
 - **View modes**: Checklist (all tasks at once) or one-at-a-time (focused single task)
+- **10 themes**: Midnight, Slate, Forest, Ember, Rose, Ocean, Dusk, Carbon (dark) + Arctic, Warm (light) — picked in Settings → Theme
 - **Spotify**: PKCE OAuth (no backend/secret needed) + Web Playback SDK — tablet is its own audio device
 - **Default playlists** pre-assigned to every routine (user can override in Settings)
 - **Fully persistent**: all state in localStorage including Spotify tokens
