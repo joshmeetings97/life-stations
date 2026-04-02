@@ -245,16 +245,26 @@ export function useSpotify(spotifyState, updateSpotify) {
       }
 
       const deviceId = stateRef.current.deviceId
-      const qs = deviceId ? `?device_id=${deviceId}` : ''
+      const deviceQs = deviceId ? `?device_id=${deviceId}` : ''
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      }
+
+      // Enable shuffle first, then start playback
+      try {
+        await fetch(
+          `https://api.spotify.com/v1/me/player/shuffle?state=true${deviceId ? `&device_id=${deviceId}` : ''}`,
+          { method: 'PUT', headers }
+        )
+      } catch {}
 
       try {
-        const res = await fetch(`https://api.spotify.com/v1/me/player/play${qs}`, {
+        const res = await fetch(`https://api.spotify.com/v1/me/player/play${deviceQs}`, {
           method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ context_uri: uri, position_ms: 0 }),
+          headers,
+          body: JSON.stringify({ context_uri: uri }),
         })
         if (!res.ok && res.status !== 204) {
           const err = await res.json().catch(() => ({}))

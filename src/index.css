@@ -35,19 +35,21 @@ ul { list-style: none; }
 /* ─── App shell ────────────────────────────────────────────────────────────── */
 
 .app {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  /* Pin to viewport — bypasses all height:100% inheritance issues */
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─── Screens ──────────────────────────────────────────────────────────────── */
 
 .screen {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* required so flex children with min-height:0 can scroll */
+  overflow: hidden;
   background: #0d0c14;
   animation: fadeIn 0.2s ease;
 }
