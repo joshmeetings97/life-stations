@@ -1,3 +1,18 @@
+// Spotify editorial playlist URIs — all are public Spotify-managed playlists.
+// Users can override any of these in Settings → Routines & Tasks.
+const PL = {
+  MORNING_MOTIVATION:  'spotify:playlist:37i9dQZF1DX3rxVfibe1L0', // Morning Motivation
+  GOOD_MORNING:        'spotify:playlist:37i9dQZF1DXdPec7aLTmlC', // Good Morning
+  WAKE_UP_HAPPY:       'spotify:playlist:37i9dQZF1DX0UrRvztWcTL', // Wake Up Happy
+  DEEP_FOCUS:          'spotify:playlist:37i9dQZF1DWZeKCadgRdKQ', // Deep Focus
+  FOCUS_FLOW:          'spotify:playlist:37i9dQZF1DWZZbwlv3Vmtr', // Focus Flow
+  CHILL_HITS:          'spotify:playlist:37i9dQZF1DX4WYpdgoIcn6', // Chill Hits
+  PEACEFUL_PIANO:      'spotify:playlist:37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
+  SLEEP:               'spotify:playlist:37i9dQZF1DWZd79rJ6a7lp', // Sleep
+  BEAST_MODE:          'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP', // Beast Mode
+  COOL_DOWN:           'spotify:playlist:37i9dQZF1DWTkxQvqMy4WW', // Cool Down & Stretch
+}
+
 export const DEFAULT_STATIONS = [
   {
     id: 'bathroom',
@@ -8,7 +23,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'bathroom-morning',
         name: 'Morning',
-        playlistUri: '',
+        playlistUri: PL.MORNING_MOTIVATION,
         tasks: [
           { id: 'bm1', text: 'Brush teeth' },
           { id: 'bm2', text: 'Shower' },
@@ -21,7 +36,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'bathroom-evening',
         name: 'Evening',
-        playlistUri: '',
+        playlistUri: PL.PEACEFUL_PIANO,
         tasks: [
           { id: 'be1', text: 'Wash face + moisturizer' },
           { id: 'be2', text: 'Floss + brush teeth' },
@@ -39,7 +54,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'kitchen-morning',
         name: 'Morning',
-        playlistUri: '',
+        playlistUri: PL.GOOD_MORNING,
         tasks: [
           { id: 'km1', text: 'Drink a full glass of water' },
           { id: 'km2', text: 'Make coffee / breakfast' },
@@ -50,7 +65,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'kitchen-evening',
         name: 'Evening',
-        playlistUri: '',
+        playlistUri: PL.CHILL_HITS,
         tasks: [
           { id: 'ke1', text: 'Do dishes / run dishwasher' },
           { id: 'ke2', text: 'Wipe down counter and island' },
@@ -69,7 +84,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'desk-morning',
         name: 'Morning — Start Day',
-        playlistUri: '',
+        playlistUri: PL.DEEP_FOCUS,
         tasks: [
           { id: 'dm1', text: 'Journal — 5 min brain dump' },
           { id: 'dm2', text: 'Write top 3 priorities for the day' },
@@ -79,7 +94,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'desk-precall',
         name: 'Pre-Call Quick Check',
-        playlistUri: '',
+        playlistUri: PL.FOCUS_FLOW,
         tasks: [
           { id: 'dp1', text: 'Check background is clean' },
           { id: 'dp2', text: 'Headphones / mic ready' },
@@ -91,7 +106,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'desk-focus',
         name: 'Focus Mode',
-        playlistUri: '',
+        playlistUri: PL.DEEP_FOCUS,
         tasks: [
           { id: 'df1', text: 'Write today\'s top 3 work priorities' },
           { id: 'df2', text: 'Glass of water at your desk' },
@@ -102,7 +117,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'desk-evening',
         name: 'Evening — Wind Down',
-        playlistUri: '',
+        playlistUri: PL.CHILL_HITS,
         tasks: [
           { id: 'de1', text: '5 min living room tidy' },
           { id: 'de2', text: 'Write 3 things you got done today' },
@@ -121,7 +136,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'bedroom-morning',
         name: 'Morning',
-        playlistUri: '',
+        playlistUri: PL.WAKE_UP_HAPPY,
         tasks: [
           { id: 'brm1', text: 'Make the bed immediately' },
           { id: 'brm2', text: 'Open the blinds' },
@@ -132,7 +147,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'bedroom-bedtime',
         name: 'Bedtime',
-        playlistUri: '',
+        playlistUri: PL.SLEEP,
         tasks: [
           { id: 'brb1', text: 'Lay out tomorrow\'s clothes' },
           { id: 'brb2', text: 'Phone on charger face down' },
@@ -151,7 +166,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'gym-pre',
         name: 'Pre-Workout',
-        playlistUri: '',
+        playlistUri: PL.BEAST_MODE,
         tasks: [
           { id: 'gp1', text: 'Drink water' },
           { id: 'gp2', text: 'Light snack if needed' },
@@ -161,7 +176,7 @@ export const DEFAULT_STATIONS = [
       {
         id: 'gym-post',
         name: 'Post-Workout',
-        playlistUri: '',
+        playlistUri: PL.COOL_DOWN,
         tasks: [
           { id: 'go1', text: 'Protein / recovery food' },
           { id: 'go2', text: 'Stretch 5 min' },
@@ -175,6 +190,7 @@ export const DEFAULT_STATIONS = [
 
 export const DEFAULT_SETTINGS = {
   viewMode: 'checklist', // 'checklist' | 'single'
+  defaultStationId: null, // null = show Home screen; station id = open that station on load
   spotify: {
     clientId: '',
     accessToken: '',

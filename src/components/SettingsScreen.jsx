@@ -265,6 +265,38 @@ export default function SettingsScreen({
 
       <div className="settings-scroll">
 
+        {/* This tablet */}
+        <SectionHeader>This Tablet</SectionHeader>
+        <div className="settings-card">
+          <div className="settings-row settings-row--col">
+            <div>
+              <p className="settings-row__title">Default station</p>
+              <p className="settings-row__sub">
+                This tablet will open directly to the selected station on load.
+                Set to <strong>None</strong> to show the full home screen.
+              </p>
+            </div>
+            <div className="station-picker">
+              <button
+                className={`station-pick-btn${!state.settings.defaultStationId ? ' active' : ''}`}
+                onClick={() => updateSettings({ defaultStationId: null })}
+              >
+                None
+              </button>
+              {state.stations.map((s) => (
+                <button
+                  key={s.id}
+                  className={`station-pick-btn${state.settings.defaultStationId === s.id ? ' active' : ''}`}
+                  style={{ '--accent': s.color }}
+                  onClick={() => updateSettings({ defaultStationId: s.id })}
+                >
+                  {s.icon} {s.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Display */}
         <SectionHeader>Display Mode</SectionHeader>
         <div className="settings-card">

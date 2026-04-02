@@ -15,8 +15,27 @@ function buildInitialState(saved) {
   if (!saved) {
     return { stations: DEFAULT_STATIONS, settings: DEFAULT_SETTINGS }
   }
+
+  // Migrate: fill in empty playlistUri fields from defaults without wiping user edits
+  const savedStations = saved.stations ?? DEFAULT_STATIONS
+  const stations = savedStations.map((savedStation) => {
+    const defaultStation = DEFAULT_STATIONS.find((s) => s.id === savedStation.id)
+    if (!defaultStation) return savedStation
+    return {
+      ...savedStation,
+      routines: savedStation.routines.map((savedRoutine) => {
+        const defaultRoutine = defaultStation.routines.find((r) => r.id === savedRoutine.id)
+        if (!defaultRoutine) return savedRoutine
+        return {
+          ...savedRoutine,
+          playlistUri: savedRoutine.playlistUri || defaultRoutine.playlistUri,
+        }
+      }),
+    }
+  })
+
   return {
-    stations: saved.stations ?? DEFAULT_STATIONS,
+    stations,
     settings: {
       ...DEFAULT_SETTINGS,
       ...saved.settings,

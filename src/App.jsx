@@ -8,8 +8,11 @@ import { useSpotify } from './hooks/useSpotify'
 
 export default function App() {
   const { state, updateStations, updateRoutine, updateSettings, updateSpotify } = useAppState()
-  const [view, setView] = useState('home')
-  const [currentStationId, setCurrentStationId] = useState(null)
+
+  // If a default station is configured, open to that station on load
+  const defaultId = state.settings.defaultStationId ?? null
+  const [view, setView] = useState(defaultId ? 'station' : 'home')
+  const [currentStationId, setCurrentStationId] = useState(defaultId)
   const [currentRoutineId, setCurrentRoutineId] = useState(null)
 
   const spotify = useSpotify(state.settings.spotify, updateSpotify)
@@ -69,10 +72,18 @@ export default function App() {
     setCurrentRoutineId(null)
   }
 
+  // "Home" returns to default station if one is set, otherwise the home screen
   const handleHome = () => {
-    setView('home')
-    setCurrentStationId(null)
-    setCurrentRoutineId(null)
+    const def = state.settings.defaultStationId
+    if (def) {
+      setCurrentStationId(def)
+      setCurrentRoutineId(null)
+      setView('station')
+    } else {
+      setView('home')
+      setCurrentStationId(null)
+      setCurrentRoutineId(null)
+    }
   }
 
   return (
